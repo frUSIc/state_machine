@@ -7,10 +7,14 @@
     "lint": "eslint . --parser @typescript-eslint/parser && tsc --noEmit",
     "test": "jest",
     "build": "tsc",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "start": "ts-node src/index.ts"
   },
   "author": "frUSIc",
   "license": "ISC",
+  "dependencies": {
+    "xstate": "^4.38.3"
+  },
   "devDependencies": {
     "@types/jest": "^29.5.7",
     "@types/node": "^20.8.10",
