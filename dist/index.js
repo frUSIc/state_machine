@@ -8,33 +8,27 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.main = void 0;
-const xstate_1 = require("xstate");
-const machine_1 = require("./machine");
-let currState;
+const prompt_sync_1 = __importDefault(require("prompt-sync"));
+const prompt = (0, prompt_sync_1.default)();
+const candy_machine_1 = require("./candy_machine");
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const candyMachine = (0, xstate_1.interpret)(machine_1.candyMachineStatechart)
-                .onTransition((state) => (currState = state.value))
-                .start();
-            candyMachine.send({ type: machine_1.Event.ADD_VALID_COIN, value: 50 });
-            candyMachine.send({ type: machine_1.Event.HALF_TURN });
-            candyMachine.send({ type: machine_1.Event.HALF_TURN });
-            candyMachine.send({ type: machine_1.Event.ADD_VALID_COIN, value: 20 });
-            candyMachine.send({ type: machine_1.Event.HALF_TURN });
-            candyMachine.send({ type: machine_1.Event.HALF_TURN });
-            candyMachine.send({ type: machine_1.Event.ADD_INVALID_COIN });
-            candyMachine.send({ type: machine_1.Event.HALF_TURN });
-            candyMachine.send({ type: machine_1.Event.HALF_TURN });
-            candyMachine.send({ type: machine_1.Event.SHUTDOWN });
+        console.log('Which machine would you like to play with?');
+        console.log('  a) Candy machine');
+        const machineChoice = prompt('> ');
+        console.log();
+        if (machineChoice === 'a') {
+            (0, candy_machine_1.runCandyMachine)();
         }
-        catch (e) {
-            console.log('Uh oh, broke the candy machine:', e.message, '-', currState);
+        else {
         }
     });
 }
 exports.main = main;
 main();
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9zcmMvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7O0FBQUEsbUNBQStDO0FBQy9DLHVDQUEwRDtBQUUxRCxJQUFJLFNBQWlDLENBQUM7QUFFdEMsU0FBc0IsSUFBSTs7UUFDeEIsSUFBSTtZQUNGLE1BQU0sWUFBWSxHQUFHLElBQUEsa0JBQVMsRUFBQyxnQ0FBc0IsQ0FBQztpQkFDbkQsWUFBWSxDQUFDLENBQUMsS0FBSyxFQUFFLEVBQUUsQ0FBQyxDQUFDLFNBQVMsR0FBRyxLQUFLLENBQUMsS0FBSyxDQUFDLENBQUM7aUJBQ2xELEtBQUssRUFBRSxDQUFDO1lBQ1gsWUFBWSxDQUFDLElBQUksQ0FBQyxFQUFFLElBQUksRUFBRSxlQUFLLENBQUMsY0FBYyxFQUFFLEtBQUssRUFBRSxFQUFFLEVBQUUsQ0FBQyxDQUFDO1lBQzdELFlBQVksQ0FBQyxJQUFJLENBQUMsRUFBRSxJQUFJLEVBQUUsZUFBSyxDQUFDLFNBQVMsRUFBRSxDQUFDLENBQUM7WUFDN0MsWUFBWSxDQUFDLElBQUksQ0FBQyxFQUFFLElBQUksRUFBRSxlQUFLLENBQUMsU0FBUyxFQUFFLENBQUMsQ0FBQztZQUM3QyxZQUFZLENBQUMsSUFBSSxDQUFDLEVBQUUsSUFBSSxFQUFFLGVBQUssQ0FBQyxjQUFjLEVBQUUsS0FBSyxFQUFFLEVBQUUsRUFBRSxDQUFDLENBQUM7WUFDN0QsWUFBWSxDQUFDLElBQUksQ0FBQyxFQUFFLElBQUksRUFBRSxlQUFLLENBQUMsU0FBUyxFQUFFLENBQUMsQ0FBQztZQUM3QyxZQUFZLENBQUMsSUFBSSxDQUFDLEVBQUUsSUFBSSxFQUFFLGVBQUssQ0FBQyxTQUFTLEVBQUUsQ0FBQyxDQUFDO1lBQzdDLFlBQVksQ0FBQyxJQUFJLENBQUMsRUFBRSxJQUFJLEVBQUUsZUFBSyxDQUFDLGdCQUFnQixFQUFFLENBQUMsQ0FBQztZQUNwRCxZQUFZLENBQUMsSUFBSSxDQUFDLEVBQUUsSUFBSSxFQUFFLGVBQUssQ0FBQyxTQUFTLEVBQUUsQ0FBQyxDQUFDO1lBQzdDLFlBQVksQ0FBQyxJQUFJLENBQUMsRUFBRSxJQUFJLEVBQUUsZUFBSyxDQUFDLFNBQVMsRUFBRSxDQUFDLENBQUM7WUFDN0MsWUFBWSxDQUFDLElBQUksQ0FBQyxFQUFFLElBQUksRUFBRSxlQUFLLENBQUMsUUFBUSxFQUFFLENBQUMsQ0FBQztTQUM3QztRQUFDLE9BQU8sQ0FBQyxFQUFFO1lBQ1YsT0FBTyxDQUFDLEdBQUcsQ0FBQyxpQ0FBaUMsRUFBRyxDQUFXLENBQUMsT0FBTyxFQUFFLEdBQUcsRUFBRSxTQUFTLENBQUMsQ0FBQztTQUN0RjtJQUNILENBQUM7Q0FBQTtBQWxCRCxvQkFrQkM7QUFFRCxJQUFJLEVBQUUsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9zcmMvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsOERBQXFDO0FBQ3JDLE1BQU0sTUFBTSxHQUFHLElBQUEscUJBQVUsR0FBRSxDQUFDO0FBQzVCLG1EQUFrRDtBQUdsRCxTQUFzQixJQUFJOztRQUN4QixPQUFPLENBQUMsR0FBRyxDQUFDLDRDQUE0QyxDQUFDLENBQUM7UUFDMUQsT0FBTyxDQUFDLEdBQUcsQ0FBQyxvQkFBb0IsQ0FBQyxDQUFDO1FBQ2xDLE1BQU0sYUFBYSxHQUFHLE1BQU0sQ0FBQyxJQUFJLENBQUMsQ0FBQztRQUNuQyxPQUFPLENBQUMsR0FBRyxFQUFFLENBQUM7UUFDZCxJQUFJLGFBQWEsS0FBSyxHQUFHLEVBQUU7WUFDekIsSUFBQSwrQkFBZSxHQUFFLENBQUM7U0FDbkI7YUFBTTtTQUVOO0lBQ0gsQ0FBQztDQUFBO0FBVkQsb0JBVUM7QUFFRCxJQUFJLEVBQUUsQ0FBQyJ9
